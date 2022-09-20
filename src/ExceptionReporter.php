@@ -17,12 +17,13 @@ class ExceptionReporter
 {
 
 
-    public function notify(\Exception $e, Request $request)
+    public function notify($e, $request)
     {
         $userId = Auth::check() ? auth()->user()->id : null;
         $dateTime = date('Y-m-d H:i:s') . PHP_EOL . PHP_EOL;
 
         $text = 'Report From *' . config('app.name') . '*' . PHP_EOL;
+        $text .= 'URL :  *' . $request->url() . '*' . PHP_EOL;
         $text .= 'Error ' . PHP_EOL;
         $text.= PHP_EOL .'Date : ' . $dateTime;
         if ($userId) {
