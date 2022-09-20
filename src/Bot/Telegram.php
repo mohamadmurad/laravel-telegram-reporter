@@ -56,7 +56,7 @@ class Telegram
 
         $url = $this->generateURL($method);
         if ($requestMethod == 'POST') {
-            $response = Http::post($url, $params);
+            $response = Http::withoutVerifying()->post($url, $params);
             return $response->json();
         }
 
