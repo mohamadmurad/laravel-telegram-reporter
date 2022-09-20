@@ -6,14 +6,18 @@
 install the package via composer
 
 ```
-composer require mohamadmurad/laravel-telegram-report
+composer require mohamadmurad/laravel-telegram-reporter
 ```
 
 # Config file
+
 This package publishes a config/telegram-report.php file.
 If you already have a file by that name, you must rename or remove it, as it will conflict with this package.
-You could optionally merge your own values with those required by this package, as long as the keys that this package expects are present.
-See the source file for more details <a href="https://github.com/mohamadmurad/laravelTelegramReport/blob/main/config/telegram-report.php">telegram-report.php</a>
+You could optionally merge your own values with those required by this package, as long as the keys that this package
+expects are present.
+See the source file for more
+details <a href="https://github.com/mohamadmurad/laravelTelegramReport/blob/main/config/telegram-report.php">
+telegram-report.php</a>
 
 Publish the config/telegram-report.php config file with:
 
@@ -23,13 +27,16 @@ php artisan telegram-report:install
 
 Add Configration data to your .env file
 see  <a href="https://core.telegram.org/bots#3-how-do-i-create-a-bot">how to create bot</a>
+
 ```
 TELEGRAM_TOKEN="Token for your telegram bot"  
 TELEGRAM_CHAT_ID ="your account id in telegram"
 ```
 
+# If you want to log CRUD on  any model
+
 Add package trait to any model you want to get report about it
-example : 
+example :
 
 ```php
 
@@ -44,3 +51,25 @@ class User extends Authenticatable
 ```
 
 the report send after create , update or delete any record in this model
+
+# If you want to send Errors to your Telegram bot
+
+Add this code to your Exception Handler.php 
+
+```php
+
+
+class Handler extends ExceptionHandler
+{
+     public function render($request, Throwable $e)
+    {
+        if (app()->bound('telegram-report')) {
+            app('telegram-report')->notify($e, app('request'));
+        }
+        
+        .... 
+    }
+....
+
+}
+```
