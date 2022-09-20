@@ -2,6 +2,6 @@
 
 
 return [
-    'chat_id' => env('telegram_chat_id'),
-    'token' => env('telegram_token'),
+    'chat_id' => env('TELEGRAM_CHAT_ID'),
+    'token' => env('TELEGRAM_TOKEN'),
 ];
