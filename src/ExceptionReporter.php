@@ -24,6 +24,7 @@ class ExceptionReporter
 
         $text = 'Report From *' . config('app.name') . '*' . PHP_EOL;
         $text .= 'URL :  *' . $request->url() . '*' . PHP_EOL;
+        $text .= 'IP :  *' . $request->ip() . '*' . PHP_EOL;
         $text .= 'Error ' . PHP_EOL;
         $text.= PHP_EOL .'Date : ' . $dateTime;
         if ($userId) {
